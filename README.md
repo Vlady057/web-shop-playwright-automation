@@ -1,5 +1,6 @@
-
 # Web Shop Playwright Automation
+
+[![Playwright UI Tests](https://github.com/Vlady057/web-shop-playwright-automation/actions/workflows/ci.yml/badge.svg)](https://github.com/Vlady057/web-shop-playwright-automation/actions/workflows/ci.yml)
 
 UI test automation project for the [Tricentis Demo Web Shop](https://demowebshop.tricentis.com/).
 
@@ -11,10 +12,11 @@ UI test automation project for the [Tricentis Demo Web Shop](https://demowebshop
 - pytest-html
 - Page Object Model (POM)
 - Git and GitHub
+- GitHub Actions (CI)
 
 ## Test Coverage
 
-The project includes automated UI tests covering the following areas:
+The project includes automated UI tests covering the following areas.
 
 ### Login
 
@@ -44,18 +46,46 @@ The project includes automated UI tests covering the following areas:
 
 ## Test Results
 
-Latest recorded test run: **9 passed, 0 failed**.
+Latest recorded local test run: **9 passed, 0 failed**.
+
+The test suite is executed locally with Pytest and automatically in GitHub Actions.
 
 ### Test Report Screenshot
 
 ![Playwright HTML test report](screenshots/test-report.png)
 
-The full HTML report is available in [`reports/report.html`](reports/report.html). Download the file and open it in a browser to inspect the test results.
+The full HTML report is generated at `reports/report.html` when the report command is run locally. In GitHub Actions, the generated report is uploaded as a workflow artifact when available.
+
+## Continuous Integration (CI)
+
+This project uses GitHub Actions to automatically run the Playwright UI test suite.
+
+The workflow is defined in `.github/workflows/ci.yml` and runs on:
+
+- Pushes to the `main` branch.
+- Pull requests targeting the `main` branch.
+- Manual workflow runs from the GitHub Actions tab.
+
+### CI Workflow
+
+1. Checks out the repository.
+2. Sets up Python 3.13.
+3. Installs project dependencies.
+4. Installs Playwright and Chromium.
+5. Runs the automated UI tests with Pytest.
+6. Uploads the HTML test report as a workflow artifact when available.
+
+The workflow status is shown by the badge at the top of this README. A successful workflow indicates that all workflow steps, including the automated tests, completed successfully.
+
+The HTML report artifact is retained for 14 days.
 
 ## Project Structure
 
 ```text
 web-shop-playwright-automation/
+├── .github/
+│   └── workflows/
+│       └── ci.yml
 ├── pages/
 │   ├── __init__.py
 │   ├── login_page.py
@@ -66,7 +96,6 @@ web-shop-playwright-automation/
 │   └── register_page.py
 ├── tests/
 │   ├── test_cart.py
-│   ├── test_checkout.py
 │   ├── test_login.py
 │   ├── test_logout.py
 │   ├── test_registration.py
@@ -88,7 +117,7 @@ web-shop-playwright-automation/
 
 Clone the repository:
 
-```bash
+```powershell
 git clone https://github.com/Vlady057/web-shop-playwright-automation.git
 cd web-shop-playwright-automation
 ```
